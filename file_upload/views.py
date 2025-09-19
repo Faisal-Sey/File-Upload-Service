@@ -11,7 +11,7 @@ from file_upload.serializers.upload import FileUploadSerializer, UploadedFileSer
 from file_upload.services.file_service import FileUploadService
 
 
-@api_view(['GET'])
+@api_view(['GET', 'HEAD'])
 def health_check(request):
     return Response(
         {
