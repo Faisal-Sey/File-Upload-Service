@@ -1,3 +1,4 @@
+from datetime import datetime, UTC
 import uuid
 
 from rest_framework import status, generics
@@ -8,6 +9,19 @@ from rest_framework.response import Response
 from file_upload.models import UploadedFile
 from file_upload.serializers.upload import FileUploadSerializer, UploadedFileSerializer
 from file_upload.services.file_service import FileUploadService
+
+
+@api_view(['GET'])
+def health_check(request):
+    return Response(
+        {
+            "status": "ok",
+            "message": "Service is healthy",
+            "timestamp": datetime.now(UTC).isoformat()
+        },
+        status=status.HTTP_200_OK
+    )
+
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FileUploadParser])
